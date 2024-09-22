@@ -1,0 +1,16 @@
+{
+  "Companies": [
+    {
+      "Name": "Microsoft",
+      "Employees": 150000
+    },
+    {
+      "Name": "Apple",
+      "Employees": 147000
+    },
+    {
+      "Name": "Google",
+      "Employees": 118899
+    }
+  ]
+}
