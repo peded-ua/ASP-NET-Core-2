@@ -2,7 +2,6 @@ using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Додаємо конфігураційні файли
 builder.Configuration
     .AddJsonFile("companies.json", optional: false, reloadOnChange: true)
     .AddXmlFile("companies.xml", optional: false, reloadOnChange: true)
@@ -11,12 +10,10 @@ builder.Configuration
 
 var app = builder.Build();
 
-// Ендпоінт для аналізу кількості співробітників компаній
 app.MapGet("/companies", (IConfiguration config) =>
 {
     var companies = new List<dynamic>();
 
-    // Отримуємо дані з JSON файлу
     var jsonCompanies = config.GetSection("Companies").GetChildren();
     foreach (var company in jsonCompanies)
     {
@@ -25,7 +22,6 @@ app.MapGet("/companies", (IConfiguration config) =>
         companies.Add(new { Name = name, Employees = employees });
     }
 
-    // Отримуємо дані з XML файлу
     var xmlCompanies = config.GetSection("Companies").GetChildren();
     foreach (var company in xmlCompanies)
     {
@@ -34,7 +30,6 @@ app.MapGet("/companies", (IConfiguration config) =>
         companies.Add(new { Name = name, Employees = employees });
     }
 
-    // Отримуємо дані з INI файлу
     var iniCompanies = new[] { "Microsoft", "Apple", "Google" };
     foreach (var iniCompany in iniCompanies)
     {
@@ -43,16 +38,14 @@ app.MapGet("/companies", (IConfiguration config) =>
         companies.Add(new { Name = name, Employees = employees });
     }
 
-    // Фільтруємо компанії, де кількість співробітників більше 2
     var filteredCompanies = companies.Where(c => c.Employees > 2);
 
     return filteredCompanies;
 });
 
-// Ендпоінт для виведення даних про користувача
 app.MapGet("/about", (IConfiguration config) =>
 {
-    // Отримуємо секцію AboutMe з конфігураційного файлу
+    // ГЋГІГ°ГЁГ¬ГіВєГ¬Г® Г±ГҐГЄГ¶ВіГѕ AboutMe Г§ ГЄГ®Г­ГґВіГЈГіГ°Г Г¶ВіГ©Г­Г®ГЈГ® ГґГ Г©Г«Гі
     var name = config["AboutMe:Name"];
     var age = config["AboutMe:Age"];
     var city = config["AboutMe:City"];
