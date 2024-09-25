@@ -45,7 +45,6 @@ app.MapGet("/companies", (IConfiguration config) =>
 
 app.MapGet("/about", (IConfiguration config) =>
 {
-    // Îòðèìóºìî ñåêö³þ AboutMe ç êîíô³ãóðàö³éíîãî ôàéëó
     var name = config["AboutMe:Name"];
     var age = config["AboutMe:Age"];
     var city = config["AboutMe:City"];
